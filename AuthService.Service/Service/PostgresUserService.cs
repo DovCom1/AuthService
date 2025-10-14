@@ -11,18 +11,18 @@ public class PostgresUserService(ILogger<PostgresUserService> logger, PostgresDb
     private readonly ILogger<PostgresUserService> _logger = logger;
     private PostgresDbContext _context = context;
 
-    public async Task<User?> TryGetUser(string username)
+    public async Task<User?> TryGetUser(string email)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u =>
-            u.Username == username);
+            u.Email == email);
         return user;
     }
 
-    public async Task<bool> CreateUser(string username, string hashPassword)
+    public async Task<bool> CreateUser(string email, string hashPassword)
     {
         try
         {
-            await _context.Users.AddAsync(new User { Username = username,  HashPassword = hashPassword });
+            await _context.Users.AddAsync(new User { Email = email,  HashPassword = hashPassword });
             await _context.SaveChangesAsync();
             return true;
         }

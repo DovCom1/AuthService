@@ -2,5 +2,5 @@ namespace AuthService.Model.Interfaces.Manager;
 
 public interface IRegisterManager
 {
-    Task<bool> TryRegisterUser(string username, string password);
+    Task<bool> TryRegisterUser(string email, string password);
 }

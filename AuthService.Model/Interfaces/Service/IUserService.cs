@@ -4,6 +4,6 @@ namespace AuthService.Model.Interfaces.Service;
 
 public interface IUserService
 {
-    Task<User?> TryGetUser(string username);
-    Task<bool> CreateUser(string username, string password);
+    Task<User?> TryGetUser(string email);
+    Task<bool> CreateUser(string email, string password);
 }

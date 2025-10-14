@@ -13,13 +13,13 @@ public class RegisterManager(
     private readonly IUserService _userService = userService;
     private readonly IPasswordService _passwordService = passwordService;
     
-    public async Task<bool> TryRegisterUser(string username, string password)
+    public async Task<bool> TryRegisterUser(string email, string password)
     {
-        var user = await _userService.TryGetUser(username);
+        var user = await _userService.TryGetUser(email);
         if (user == null)
         {
-            _logger.LogInformation($"User {username} can be added");
-            return await _userService.CreateUser(username, _passwordService.HashPassword(password));
+            _logger.LogInformation($"User {email} can be added");
+            return await _userService.CreateUser(email, _passwordService.HashPassword(password));
         }
         return false;
     }

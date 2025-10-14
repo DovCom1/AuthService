@@ -12,11 +12,11 @@ public class TokenService(IOptions<SecretKeys> options) : ITokenService
 {
     private readonly SymmetricSecurityKey _secretKey = 
         new SymmetricSecurityKey(Encoding.ASCII.GetBytes(options.Value.TokenSecretKey));
-    public string GenerateToken(string username)
+    public string GenerateToken(string email)
     {
         var claims = new[]
         {
-            new Claim("Username", username)
+            new Claim("Username", email)
         };
 
         var creds = new SigningCredentials(_secretKey, SecurityAlgorithms.HmacSha256);

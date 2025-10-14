@@ -15,16 +15,16 @@ public class LoginManager(
     private readonly IPasswordService _passwordService = passwordService;
     private readonly ITokenService _tokenService = tokenService;
     
-    public async Task<string?> TryVerifyUser(string username, string password)
+    public async Task<string?> TryVerifyUser(string email, string password)
     {
-        _logger.LogInformation($"Try search user {username} in storage");
-        var user = await _userService.TryGetUser(username);
+        _logger.LogInformation($"Try search user {email} in storage");
+        var user = await _userService.TryGetUser(email);
         if (user != null && _passwordService.VerifyUser(user.HashPassword, password))
         {
-            _logger.LogInformation($"User {username} was found and authenticated");
-            return _tokenService.GenerateToken(username);
+            _logger.LogInformation($"User {email} was found and authenticated");
+            return _tokenService.GenerateToken(email);
         }
-        _logger.LogWarning($"User {username} was not found or password is incorrect");
+        _logger.LogWarning($"User {email} was not found or password is incorrect");
         return null;
     }
 }

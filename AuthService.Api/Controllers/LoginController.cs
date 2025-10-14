@@ -15,14 +15,14 @@ public class LoginController(ILogger<LoginController> logger, ILoginManager logi
     [HttpPost]
     public async Task<IActionResult> LoginUser([FromBody] LoginDto dto)
     {
-        _logger.LogInformation($"User {dto.Username} try to login");
-        var token = await _loginManager.TryVerifyUser(dto.Username, dto.Password);
+        _logger.LogInformation($"User {dto.Email} try to login");
+        var token = await _loginManager.TryVerifyUser(dto.Email, dto.Password);
         if (token != null)
         {
-            _logger.LogInformation($"User {dto.Username} successfully logged in");
+            _logger.LogInformation($"User {dto.Email} successfully logged in");
             return Ok(new TokenDto(token));
         }
-        _logger.LogWarning($"User {dto.Username} failed to login");
+        _logger.LogWarning($"User {dto.Email} failed to login");
         return Unauthorized();
     }
 }
