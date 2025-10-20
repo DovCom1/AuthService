@@ -14,6 +14,8 @@ public class LoginController(ILogger<LoginController> logger, ILoginManager logi
     private readonly ILoginManager _loginManager = loginManager;
 
     [HttpPost]
+    [ProducesResponseType(typeof(TokenDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> LoginUser([FromBody] LoginDto dto)
     {
         dto.DeleteBadSymbols();

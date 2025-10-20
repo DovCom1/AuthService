@@ -13,6 +13,8 @@ public class RegisterController(ILogger<RegisterController> logger, IRegisterMan
     private readonly IRegisterManager _registerManager = registerManager;
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RegisterUser([FromBody] RegisterDto registerDto)
     {
         registerDto.DeleteBadSymbols();
@@ -21,7 +23,7 @@ public class RegisterController(ILogger<RegisterController> logger, IRegisterMan
         if (isRegister)
         {
             _logger.LogInformation($"User {registerDto.Email} registered successfully");
-            return Ok();
+            return Created();
         }
         _logger.LogWarning($"Email {registerDto.Email} is incorrect or already exists");
         return BadRequest("Email is incorrect or already exists");
