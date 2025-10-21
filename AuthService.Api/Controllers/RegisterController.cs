@@ -1,5 +1,6 @@
 using AuthService.Model.DTO;
 using AuthService.Model.Interfaces.Manager;
+using AuthService.Service.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.Api.Controllers;
@@ -14,6 +15,7 @@ public class RegisterController(ILogger<RegisterController> logger, IRegisterMan
     [HttpPost]
     public async Task<IActionResult> RegisterUser([FromBody] RegisterDto registerDto)
     {
+        registerDto.DeleteBadSymbols();
         _logger.LogInformation($"Registering User {registerDto.Email}");
         var isRegister = await _registerManager.TryRegisterUser(registerDto.Email, registerDto.Password);
         if (isRegister)

@@ -1,5 +1,6 @@
 using AuthService.Model.DTO;
 using AuthService.Model.Interfaces.Manager;
+using AuthService.Service.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.Api.Controllers;
@@ -15,6 +16,7 @@ public class LoginController(ILogger<LoginController> logger, ILoginManager logi
     [HttpPost]
     public async Task<IActionResult> LoginUser([FromBody] LoginDto dto)
     {
+        dto.DeleteBadSymbols();
         _logger.LogInformation($"User {dto.Email} try to login");
         var token = await _loginManager.TryVerifyUser(dto.Email, dto.Password);
         if (token != null)
