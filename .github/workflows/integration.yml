@@ -67,8 +67,4 @@ jobs:
             # this is a built-in strategy in release-please, see "Action Inputs"
             # for more options
             release-type: simple
-            package-name: ${{ needs.build-and-push.outputs.package-name }}
-            pull-request-title-pattern: "chore: release ${version}"
-            separate-pull-requests: false
-            # Это заставит учитывать мердж-коммиты
-            squash: false
+            target-branch: develop
