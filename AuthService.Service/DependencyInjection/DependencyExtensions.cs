@@ -34,8 +34,8 @@ public static class DependencyExtensions
         return services
             .AddLogging()
             .AddScoped<IUserService, PostgresUserService>()
-            .AddSingleton<ITokenService, TokenService>()
-            .AddSingleton<IPasswordService, PasswordService>();
+            .AddSingleton<ITokenService, TokenManager>()
+            .AddSingleton<IPasswordService, PasswordManager>();
     }
 
     private static IServiceCollection AddManagers(this IServiceCollection services)

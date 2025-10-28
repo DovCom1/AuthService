@@ -9,17 +9,13 @@ public class RegisterManager(
     IUserService userService,
     IPasswordService passwordService) : IRegisterManager
 {
-    private readonly ILogger<RegisterManager> _logger = logger;
-    private readonly IUserService _userService = userService;
-    private readonly IPasswordService _passwordService = passwordService;
-    
     public async Task<bool> TryRegisterUser(string email, string password)
     {
-        var user = await _userService.TryGetUser(email);
+        var user = await userService.TryGetUser(email);
         if (user == null)
         {
-            _logger.LogInformation($"User {email} can be added");
-            return await _userService.CreateUser(email, _passwordService.HashPassword(password));
+            logger.LogInformation($"User {email} can be added");
+            return await userService.CreateUser(email, passwordService.HashPassword(password));
         }
         return false;
     }
