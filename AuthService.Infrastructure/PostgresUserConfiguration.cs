@@ -9,7 +9,7 @@ public class PostgresUserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("user");
-        builder.HasKey(u => u.Id);
+        builder.HasKey(u => u.Email);
 
         builder
             .Property(u => u.Id)

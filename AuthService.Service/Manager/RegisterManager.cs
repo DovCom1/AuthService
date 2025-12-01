@@ -1,3 +1,4 @@
+using AuthService.Model.DTO;
 using AuthService.Model.Interfaces.Manager;
 using AuthService.Model.Interfaces.Service;
 using Microsoft.Extensions.Logging;
@@ -18,5 +19,10 @@ public class RegisterManager(
             return await userService.CreateUser(email, passwordService.HashPassword(password));
         }
         return false;
+    }
+
+    public async Task<bool> TryPutUserId(UserIdDto userIdDto)
+    {
+        return await userService.PutUserId(userIdDto);
     }
 }

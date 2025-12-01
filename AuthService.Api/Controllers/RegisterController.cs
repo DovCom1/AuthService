@@ -25,4 +25,13 @@ public class RegisterController(ILogger<RegisterController> logger, IRegisterMan
         logger.LogWarning($"Email {registerDto.Email} is incorrect or already exists");
         return BadRequest("Email is incorrect or already exists");
     }
+
+    public async Task<IActionResult> PutId([FromBody] UserIdDto userIdDto)
+    {
+        if (await registerManager.TryPutUserId(userIdDto))
+        {
+            return Ok();
+        }
+        return BadRequest("UserIdDto is incorrect or already exists");
+    }
 }
