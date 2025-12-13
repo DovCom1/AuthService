@@ -1,5 +1,5 @@
 CREATE TABLE "user" (
-    "id" UUID,
+    "id" VARCHAR,
     "email" VARCHAR PRIMARY KEY,
     "hash_password" TEXT NOT NULL
 );

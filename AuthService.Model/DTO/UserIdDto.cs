@@ -1,3 +1,3 @@
 namespace AuthService.Model.DTO;
 
-public record UserIdDto(string Email, Guid UserId);
+public record UserIdDto(string Email, string UserId);

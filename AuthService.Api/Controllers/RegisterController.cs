@@ -26,8 +26,10 @@ public class RegisterController(ILogger<RegisterController> logger, IRegisterMan
         return BadRequest("Email is incorrect or already exists");
     }
 
+    [HttpPut]
     public async Task<IActionResult> PutId([FromBody] UserIdDto userIdDto)
     {
+        logger.LogInformation($"Updating User {userIdDto.Email}");
         if (await registerManager.TryPutUserId(userIdDto))
         {
             return Ok();

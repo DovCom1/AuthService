@@ -13,7 +13,8 @@ public class PostgresUserConfiguration : IEntityTypeConfiguration<User>
 
         builder
             .Property(u => u.Id)
-            .HasColumnName("id");
+            .HasColumnName("id")
+            .IsRequired(false);
         
         builder
             .Property(u => u.Email)

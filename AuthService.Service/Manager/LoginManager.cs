@@ -15,7 +15,7 @@ public class LoginManager(
     {
         logger.LogInformation($"Try search user {email} in storage");
         var user = await userService.TryGetUser(email);
-        if (user != null && passwordService.VerifyUser(user.HashPassword, password))
+        if (user != null && passwordService.VerifyUser(user.HashPassword, password) && user.Id != null)
         {
             logger.LogInformation($"User {email} was found and authenticated");
             return new TokenDto(tokenService.GenerateToken(email), user.Id);
