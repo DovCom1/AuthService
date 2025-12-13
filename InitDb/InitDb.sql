@@ -1,5 +1,5 @@
 CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "email" VARCHAR NOT NULL UNIQUE,
+    "id" VARCHAR,
+    "email" VARCHAR PRIMARY KEY,
     "hash_password" TEXT NOT NULL
 );

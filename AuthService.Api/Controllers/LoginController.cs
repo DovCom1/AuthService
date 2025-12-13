@@ -17,11 +17,11 @@ public class LoginController(ILogger<LoginController> logger, ILoginManager logi
     {
         dto.DeleteBadSymbols();
         logger.LogInformation($"User {dto.Email} try to login");
-        var token = await loginManager.TryVerifyUser(dto.Email, dto.Password);
-        if (token != null)
+        var tokenDto = await loginManager.TryVerifyUser(dto.Email, dto.Password);
+        if (tokenDto != null)
         {
             logger.LogInformation($"User {dto.Email} successfully logged in");
-            return Ok(new TokenDto(token));
+            return Ok(tokenDto);
         }
         logger.LogWarning($"User {dto.Email} failed to login");
         return Unauthorized();

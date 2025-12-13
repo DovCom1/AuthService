@@ -1,4 +1,5 @@
 using AuthService.Infrastructure;
+using AuthService.Model.DTO;
 using AuthService.Model.Entities;
 using AuthService.Model.Interfaces.Service;
 using Microsoft.EntityFrameworkCore;
@@ -27,5 +28,17 @@ public class PostgresUserService(ILogger<PostgresUserService> logger, PostgresDb
             logger.LogError(e.Message);
             return false;
         }
+    }
+
+    public async Task<bool> PutUserId(UserIdDto userIdDto)
+    {
+        var user = await TryGetUser(userIdDto.Email);
+        if (user != null)
+        {
+            user.Id = userIdDto.UserId;
+            await context.SaveChangesAsync();
+            return true;
+        }
+        return false;
     }
 }
