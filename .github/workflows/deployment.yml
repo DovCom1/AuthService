@@ -9,6 +9,9 @@ on:
   # but only for the specific branch
   push:
     branches: [ main ]
+  workflow_run:
+    workflows: [".NET CI", "CodeQL Advanced", "Full intergation workflow"]
+    types: [completed]
 
 # A workflow run is made up of one or more jobs 
 # that can run sequentially or in parallel
