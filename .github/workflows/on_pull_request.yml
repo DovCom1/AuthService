@@ -4,8 +4,8 @@
 name: Basic integraion workflow for pull request
 
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "develop" ]
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}

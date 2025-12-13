@@ -1,8 +1,8 @@
 name: Full intergation and deployment workflow
 
 on:
-  pull_request:
-    branches: [ "main", "develop" ]
+  push:
+    branches: [ "main" ]
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}
