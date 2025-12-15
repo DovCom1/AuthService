@@ -206,6 +206,7 @@ jobs:
 
           # Path for specific folder on server for files deployment
           remote-path: ${{ secrets.REMOTE_PATH }}
+          sync: full
 
           # Port for SFTP access to server
           remote-port: 22
